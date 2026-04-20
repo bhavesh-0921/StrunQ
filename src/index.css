@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-bg-deep: #0b0b0f;
+  --color-bg-card: #131318;
+  --color-bg-card-hover: #1a1a22;
+  --color-bg-elevated: #1e1e28;
+  --color-bg-input: #0e0e14;
+  --color-accent: #e8a838;
+  --color-accent-soft: rgba(232, 168, 56, 0.12);
+  --color-accent2: #3b82f6;
+  --color-accent3: #a855f7;
+  --color-accent4: #10b981;
+  --color-danger: #ef4444;
+  --color-text-primary: #f1f1f5;
+  --color-text-secondary: #888892;
+  --color-text-dim: #555560;
+  --font-sans: 'Outfit', 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* ═══════════ KEYFRAMES ═══════════ */
+@keyframes float-in { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform: translateY(0); } }
+@keyframes pulse-ring { 0%,100% { box-shadow: 0 0 0 0 rgba(232,168,56,0); } 50% { box-shadow: 0 0 0 6px rgba(232,168,56,0.15); } }
+@keyframes glow-breathe { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+
+/* ═══════════ GLOBAL ═══════════ */
+html {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  background: var(--color-bg-deep);
+  color: var(--color-text-primary);
+  overflow: hidden;
+}
+body { 
+  height: 100vh; 
+  width: 100vw; 
+  margin: 0;
+}
+
+/* ═══════════ LAYOUT ═══════════ */
+.studio-root {
+  display: grid;
+  grid-template-rows: 56px 1fr 64px;
+  height: 100vh;
+  width: 100vw;
+  background: var(--color-bg-deep);
+  /* Ambient light wash */
+  background-image:
+    radial-gradient(ellipse 80% 60% at 25% 0%, rgba(232,168,56,0.04), transparent),
+    radial-gradient(ellipse 60% 50% at 75% 100%, rgba(59,130,246,0.03), transparent);
+}
+
+.studio-main-stage {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 24px 32px;
+  scroll-behavior: smooth;
+}
+.studio-main-stage::-webkit-scrollbar { width: 5px; }
+.studio-main-stage::-webkit-scrollbar-track { background: transparent; }
+.studio-main-stage::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.05); border-radius: 99px; }
+
+@media (max-width: 1023px) {
+  .studio-main-stage { padding: 16px; }
+}
+
+/* ═══════════ CARD ═══════════ */
+.card {
+  background: var(--color-bg-card);
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.04);
+  position: relative;
+  overflow: hidden;
+}
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,0.015) 0%, transparent 40%);
+}
+
+/* ═══════════ TRANSPORT BAR ═══════════ */
+.transport-bar {
+  background: rgba(11,11,15,0.92);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ═══════════ PAD GRID ═══════════ */
+.chord-pad {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  color: var(--color-text-secondary);
+}
+.chord-pad:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.1);
+  color: var(--color-text-primary);
+  transform: translateY(-1px);
+}
+.chord-pad:active { transform: scale(0.95); }
+
+/* Active performance pad */
+.perf-pad {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.perf-pad:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  border-color: rgba(255,255,255,0.12);
+}
+.perf-pad:active { transform: scale(0.95) translateY(0); }
+.perf-pad.active {
+  background: linear-gradient(145deg, rgba(232,168,56,0.18) 0%, rgba(232,168,56,0.05) 100%);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 30px rgba(232,168,56,0.1), inset 0 0 20px rgba(232,168,56,0.05);
+}
+
+/* ═══════════ RANGE SLIDER ═══════════ */
+input[type="range"] {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 4px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 99px; outline: none;
+  cursor: pointer; border: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 10px rgba(232,168,56,0.4);
+  cursor: grab;
+}
+input[type="range"]::-webkit-slider-thumb:active { cursor: grabbing; }
+
+/* ═══════════ UTILITIES ═══════════ */
+.label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--color-text-dim);
+}
+.glow-amber { color: var(--color-accent); text-shadow: 0 0 12px rgba(232,168,56,0.5); }
