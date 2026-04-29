@@ -32,11 +32,15 @@ html {
   background: var(--color-bg-deep);
   color: var(--color-text-primary);
   overflow: hidden;
+  height: 100vh;
+  height: 100dvh;
 }
 body { 
-  height: 100vh; 
+  height: 100vh;
+  height: 100dvh;
   width: 100vw; 
   margin: 0;
+  overflow: hidden;
 }
 
 /* ═══════════ LAYOUT ═══════════ */
@@ -44,6 +48,7 @@ body {
   display: grid;
   grid-template-rows: 56px 1fr 64px;
   height: 100vh;
+  height: 100dvh;
   width: 100vw;
   background: var(--color-bg-deep);
   /* Ambient light wash */
@@ -88,6 +93,8 @@ body {
   background: rgba(11,11,15,0.92);
   backdrop-filter: blur(20px);
   border-top: 1px solid rgba(255,255,255,0.05);
+  z-index: 50;
+  position: relative;
 }
 
 /* ═══════════ PAD GRID ═══════════ */

@@ -154,7 +154,7 @@ export default function App() {
         </div>
 
         {/* Center: Transport */}
-        <div className="flex justify-center">
+        <div className="flex flex-1 justify-center">
           <PlaybackControls
             isPlaying={isPlaying}
             onPlay={handlePlay}
